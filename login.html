@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+        background-color: #1a1a1a;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background-color: #333;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+    }
+
+    .container h2 {
+        color: #fff;
+    }
+
+    .input-group {
+        margin: 10px 0;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #1a1a1a;
+        color: #fff;
+        box-sizing: border-box; /* Add this line */
+    }
+
+    .input-group input::placeholder {
+        color: #aaa;
+    }
+
+    .input-group button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #3498db;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .input-group button:hover {
+        background-color: #2980b9;
+    }
+
+    .bottom-text {
+        margin-top: 15px;
+        color: #aaa;
+    
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Username or Email">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password">
+        </div>
+        <div class="input-group">
+            <button id="loginButton">Login</button>
+        </div>
+        <p class="bottom-text">Don't have an account? <a href="javascript:void(0);" id="showSignupForm">Sign up</a></p>
+        <div id="loggedInMessage" style="display: none; color: #fff;"></div>
+    </div>
+    
+    <script>
+    document.getElementById('loginButton').addEventListener('click', function () {
+        // Existing login code...
+    });
+
+    document.getElementById('showSignupForm').addEventListener('click', function () {
+        // Remove the login form
+        var loginForm = document.querySelector('.container');
+        loginForm.style.display = 'none';
+
+        // Create and display the signup form
+        var signupForm = document.createElement('div');
+        signupForm.id = 'signupForm';
+        signupForm.innerHTML = `
+        <div class="container">
+            <h2>Sign Up</h2>
+            <div class="input-group">
+                <input type="text" id="signupUsername" placeholder="Username">
+            </div>
+            <div class="input-group">
+                <input type="password" id="signupPassword" placeholder="Password">
+            </div>
+            <div class="input-group">
+                <button id="signupButton">Sign Up</button>
+            </div>
+        </div>
+        `;
+
+        document.body.appendChild(signupForm);
+    });
+
+    document.getElementById('loginButton').addEventListener('click', function () {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Simulated AJAX request for login (replace with your actual login process)
+            setTimeout(function () {
+                // Check for a successful login (e.g., user exists in the database)
+                var successfulLogin = true;
+
+                if (successfulLogin) {
+                    var loggedInMessage = document.getElementById('loggedInMessage');
+                    loggedInMessage.innerHTML = 'Hi, ' + username + '!';
+                    loggedInMessage.style.display = 'block';
+                    alert('Hi, ' + username + '!');
+                } else {
+                    alert('Login failed. Please check your credentials.');
+                }
+            }, 1000); // Simulate an AJAX request with a 1-second delay
+        });
+
+        document.getElementById('showSignupForm').addEventListener('click', function () {
+            // Your signup form display code here...
+        });
+
+        document.getElementById('signupButton').addEventListener('click', function () {
+            var signupUsername = document.getElementById('signupUsername').value;
+            var signupPassword = document.getElementById('signupPassword').value;
+
+            // Simulated AJAX request for sign up (replace with your actual registration process)
+            setTimeout(function () {
+                // Check for a successful sign-up
+                var successfulSignup = true;
+
+                if (successfulSignup) {
+                    var loggedInMessage = document.getElementById('loggedInMessage');
+                    loggedInMessage.innerHTML = 'Hi, ' + signupUsername + '!';
+                    loggedInMessage.style.display = 'block';
+                    alert('Hi, ' + signupUsername + '!');
+                } else {
+                    alert('Sign up failed. Please try again.');
+                }
+            }, 1000); // Simulate an AJAX request with a 1-second delay
+        });
+</script>
+
+</body>
+</html>
+

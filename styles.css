@@ -1,0 +1,249 @@
+body {
+    background-color: #232323;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color:#111;
+    padding: 5px 0;
+    position: sticky;
+    top: 0;
+    opacity: 90%;
+    z-index: 1;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 100px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+.auth-buttons a{
+    text-decoration: none;
+    color: white;
+}
+.auth-buttons button {
+    background-color: #111;
+    color: #fff;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.auth-buttons a:hover,
+.auth-buttons button:hover {
+    background-color: #232323;
+    transform: scale(1.05);
+}
+
+.main-container {
+    background-color: #111;
+    height: 100vh;
+}
+
+.home-container h1 {
+    font-size: 65px;
+    text-align: left;
+    width: 50%;
+    font-weight: bold;
+    display: inline-block;
+    margin: 50px 100px 0 100px;
+}
+
+.home-container p {
+    font-size: 25px;
+    text-align: left;
+    width: 55%;
+    color: grey;
+    font-weight: bold;
+    margin: 15px 100px;
+}
+
+.below-home button{
+    padding: 10px;
+    background-color: rgb(31, 100, 27);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    margin: 15px 0 0 100px;
+}
+
+.cgrid {
+    padding: 20px;
+    background-color:black;
+    border-radius: 15px;
+    height: 250px;
+    width: auto;
+    margin: 80px 100px;
+    
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    
+    
+}
+
+.sub1 {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+}
+
+.sub2 {
+    font-size: 25px;
+    color: rgb(190, 190, 190);
+    text-align: center;
+}
+
+
+/* =----------------------------- */
+.text-container{
+    padding: 0 100px;
+}
+
+
+.text-container span{
+    font-size: 70px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.title-word {
+    animation: color-animation 2s linear infinite;
+  }
+  
+  .title-word-1 {
+    --color-1: #DF8453;
+    --color-2: #3D8DAE;
+    --color-3: #E4A9A8;
+  }
+  
+  .title-word-2 {
+    --color-1: #DBAD4A;
+    --color-2: #5da29a;
+    --color-3: #a5dcdf;
+  }
+  
+  .title-word-3 {
+    --color-1: #ACCFCB;
+    --color-2: #d19392;
+    --color-3: #ACCFCB;
+  }
+  
+  .title-word-4 {
+    --color-1: #3D8DAE;
+    --color-2: #e9ddd6;
+    --color-3: #d39a99;
+  }
+  
+  @keyframes color-animation {
+    0%    {color: var(--color-1)}
+    32%   {color: var(--color-1)}
+    33%   {color: var(--color-2)}
+    65%   {color: var(--color-2)}
+    66%   {color: var(--color-3)}
+    99%   {color: var(--color-3)}
+    100%  {color: var(--color-1)}
+  }
+  
+  /* Here are just some visual styles. 🖌 */
+  
+  .container {
+    display: grid;
+    place-items: center;  
+    text-align: center;
+    height: 100vh
+  }
+  
+  .title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 8.5vw;
+    text-transform: uppercase;
+  }
+
+/* ---------------------------------- */
+footer{
+    background-color: #111;
+}
+
+#offline{
+    text-align: center;
+    margin: 50px;
+    font-size: 20px;
+    color: grey;
+
+}
+
+.f1{
+    font-size: 15px;
+    padding: 20px 50px;
+    font-weight: bold;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    text-align: left;
+    display: block;
+    margin: 0 50px;
+}
+
+ul{
+     display: flex;
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+ }
+
+ ul img{
+     height: 30px;
+     width: 30px;
+ }
+ ul img:hover{
+     transform: rotate(340deg);
+           }
+
+.container-myjan{
+   padding: 20px;
+   margin: 50px;
+   font-size: 30px;
+   background-color:#1b1b1b;
+   
+}
+
+.container-myjan button{
+    padding: 10px;
+    background-color:#a5dcdf;
+    border-radius: 2px;
+    margin: 20px;
+    width: 400px;
+}
+
+#answers{
+    width: 500px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+#quizContainer{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    margin: 20px;
+}

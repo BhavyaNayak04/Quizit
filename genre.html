@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <title>Quizit</title>
+    <style>
+
+    .genre-selector {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background-color: black;
+    }
+
+    .genre-row {
+        display: flex;
+        justify-content: space-between;
+        width: 48%;
+        margin-bottom: 20px;
+    }
+
+    .genre-card {
+        border: 1px solid #5b5858;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+        width: 48%;
+        margin: 20px;
+        background-color: #eee9e9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s;
+        cursor: pointer;
+    }
+
+    .genre-card:hover {
+        transform: scale(1.05);
+    }
+
+    .genre-card img {
+        width: 240px;
+        height: 200px;
+    }
+
+    .genre-name {
+        margin-top: 10px;
+        color: black;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .myoptions{
+        height: 50px;
+        padding: 20px;
+        background-color: black;
+        font-size: 35px;
+        display: flex;
+        justify-content: center;
+    }
+
+    input[type="radio"] {
+  opacity: 0;
+    }
+    
+label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked + label:before {
+  background-color: #ffffff; /* Change the background color when checked */
+}
+
+/* Optional: Add some spacing */
+label + label {
+  margin-top: 10px;
+}
+
+
+ 
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" style="text-decoration: none; color: white;"><h1>Quizit</h1></a>
+            <div class="auth-buttons">
+              <button id="home"><a href="index.html">Home</a></button>
+                <button id="logIn"><a href="login.html">Log in</a></button>
+                <button><a href="about.html">About us</a></button>
+            </div>
+        </div>
+    </header>
+<body>
+    <p style="font-size: 35px; text-align: center;">Select the type and genre for your quiz:</p>
+    <div class="myoptions">
+        <div class="radio-container">
+            <input type="radio" name="options" id="option1" value="Option 1">
+            <label for="option1">Multiple Choice</label>
+          
+            <input type="radio" name="options" id="option2" value="Option 2">
+            <label for="option2">Question & Answers</label>
+          </div>
+          
+    </div>
+
+        <div class="genre-selector">
+            <div class="genre-row">
+                <div class="genre-card" id="sciencenature" data-id="17">
+                    <img src="science.jfif" alt="Science Quiz">
+                    <div class="genre-name">Science</div>
+                </div>
+                <div class="genre-card" id="historyholidays" data-id="23">
+                    <img src="history.jfif" alt="History Quiz">
+                    <div class="genre-name">History</div>
+                </div>
+            </div>
+            <div class="genre-row">
+                <div class="genre-card" id="music" data-id="12">
+                    <img src="music.jfif" alt="Music Quiz">
+                    <div class="genre-name">Music</div>
+                </div>
+                <div class="genre-card" id="entertainment" data-id="14">
+                    <img src="entertainment.jfif" alt="Entertainment Quiz">
+                    <div class="genre-name">Entertainment</div>
+                </div>
+            </div>
+            <div class="genre-row">
+                <div class="genre-card" id="sportsleisure" data-id="21">
+                    <img src="sports.jfif" alt="Sports Quiz">
+                    <div class="genre-name">Sports</div>
+                </div>
+                <div class="genre-card" id="artliterature" data-id="25">
+                    <img src="literature.jfif" alt="Literature Quiz">
+                    <div class="genre-name">Literature</div>
+                </div>
+            </div>
+            <div class="genre-row">
+                <div class="genre-card" id="geography" data-id="22">
+                    <img src="geography.jfif" alt="Geography Quiz" >
+                    <div class="genre-name">Geography</div>
+                </div>
+                <div class="genre-card" id="animals" data-id="27">
+                    <img src="animal.jfif" alt="Animal Quiz">
+                    <div class="genre-name">Animals</div>
+                </div>
+            </div>
+
+            <div class="genre-row">
+                <div class="genre-card" id="general" data-id="9">
+                    <img src="general.jfif" alt="General Quiz">
+                    <div class="genre-name">General</div>
+                </div>
+                <div class="genre-card" id="language" data-id="10">
+                    <img src="lang.webp" alt="Language Quiz">
+                    <div class="genre-name">Language</div>
+                </div>
+            </div>
+
+            <div class="genre-row">
+                <div class="genre-card" id="mathematics" data-id="19">
+                    <img src="math.jfif" alt="Mathematics Quiz">
+                    <div class="genre-name">Mathematics</div>
+                </div>
+                <div class="genre-card" id="peopleplaces" data-id="26">
+                    <img src="people.webp" alt="People-Places Quiz">
+                    <div class="genre-name">People-Places</div>
+                </div>
+            </div>
+            
+        </div>
+
+    <script>
+      
+     
+const option1 = document.getElementById("option1");
+const option2 = document.getElementById("option2");
+const gridCards = document.querySelectorAll(".genre-card");
+ 
+
+for (const card of gridCards) {
+  card.addEventListener("click", function() {
+   
+    if (option1.checked) {
+      window.location.href = `mcq.html?data-id=${card.getAttribute("data-id")}`;
+    } else if (option2.checked) {
+      window.location.href = `qna.html?id=${card.getAttribute("id")}`;
+    } else {
+      alert("Please select one option before proceeding to the quiz.");
+    }
+  });
+}
+
+
+    </script>
+</body>
+</html>

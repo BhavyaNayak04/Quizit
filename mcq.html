@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <title>Quiz Website</title>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" style="text-decoration: none; color: white;"><h1>Quizit</h1></a>
+            <div class="auth-buttons">
+              <button id="home"><a href="index.html">Home</a></button>
+                <button id="logIn"><a href="login.html">Log in</a></button>
+                <button><a href="about.html">About us</a></button>
+            </div>
+        </div>
+    </header>
+    <div class="container-myjan">
+        <div id="quizContainer">
+            <div id="question"></div>
+            <div id="answers"></div>
+        </div>
+    </div>
+
+    <script>
+       
+
+       let questions = [];
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('data-id');
+       document.addEventListener('DOMContentLoaded', function () {
+            startQuiz();
+        });
+        
+
+        function startQuiz() {
+            // Clear previous quiz content, if any
+            clearQuiz();
+
+            if (questions.length === 0) {
+                fetchQuestions(category);
+            } else {
+                displayQuestion();
+            }
+        }
+
+        function clearQuiz() {
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('question').textContent = '';
+            document.getElementById('answers').textContent = '';
+        }
+
+        function fetchQuestions(category) {
+            const apiUrl = `https://opentdb.com/api.php?amount=50&category=${category}&type=multiple`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    questions = data.results;
+                    displayQuestion();
+                })
+                .catch(error => {
+                    console.error("Error fetching data: " + error);
+                });
+        }
+
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById('question');
+            const answersElement = document.getElementById('answers');
+
+            const currentQuestion = questions[currentQuestionIndex];
+
+            questionElement.textContent = currentQuestion.question;
+            answersElement.textContent = ''; // Clear previous answers
+
+            // Combine correct and incorrect answers and shuffle them
+            const answers = currentQuestion.incorrect_answers.concat(currentQuestion.correct_answer);
+            shuffleArray(answers);
+
+            answers.forEach(answer => {
+                const answerButton = document.createElement('button');
+                answerButton.textContent = answer;
+                answerButton.addEventListener('click', () => checkAnswer(currentQuestion, answer));
+                answersElement.appendChild(answerButton);
+            });
+
+            document.getElementById('quizContainer').style.display = 'flex';
+        }
+
+        function checkAnswer(question, selectedAnswer) {
+            const correctAnswer = question.correct_answer;
+            if (selectedAnswer === correctAnswer) {
+                // Handle a correct answer, you can display a message or keep score here
+                alert('Correct!');
+            } else {
+                // Handle an incorrect answer
+                alert('Incorrect! The correct answer is: ' + correctAnswer);
+            }
+
+            // Move to the next question
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                alert('Quiz completed!');
+                clearQuiz();
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+    </script>
+</body>
+</html>

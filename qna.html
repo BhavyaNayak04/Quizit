@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
+    <title>Quiz Website</title>
+    <style>
+        /* Style the trivia container */
+#trivia-questions {
+    background-color: rgb(28, 28, 28);
+    padding: 60px;
+    margin: 10px;
+}
+
+/* Style the question text */
+#question-text {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#old-questions{
+background-color: black;
+padding: 10px;
+margin-top: 20px;
+}
+#old-questions div{
+background-color: #111;
+padding: 10px;
+}
+/* Style the answer text */
+#answer-text {
+    font-weight: bold;
+    color: #008CBA;
+}
+
+/* Style the next button */
+#next-button {
+    background-color: #008CBA;
+    color: rgb(68, 64, 64);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Adjust button on hover state */
+#next-button:hover {
+    background-color: #2e3031;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" style="text-decoration: none; color: white;"><h1>Quizit</h1></a>
+            <div class="auth-buttons">
+              <button id="home"><a href="index.html">Home</a></button>
+                <button id="logIn"><a href="login.html">Log in</a></button>
+                <button><a href="about.html">About us</a></button>
+            </div>
+        </div>
+    </header>
+    <div id="trivia-questions">
+        <p id="question-text"></p>
+        <p><strong>Answer:</strong> <span id="answer-text"></span></p>
+        
+        <button id="next-button">Next Question</button>
+        <div id="old-questions"></div>
+    </div>
+
+    <script>
+        let triviaData = [];
+        let currentQuestionIndex = 0;
+        const oldQuestions = [];
+
+        function showQuestion() {
+            const questionElement = document.getElementById('question-text');
+            const answerElement = document.getElementById('answer-text');
+            const nextButton = document.getElementById('next-button');
+            const oldQuestionsContainer = document.getElementById('old-questions');
+
+            if (currentQuestionIndex < triviaData.length) {
+                const questionData = triviaData[currentQuestionIndex];
+                questionElement.textContent = questionData.question;
+                answerElement.textContent = questionData.answer;
+                oldQuestions.push(questionData);
+
+                currentQuestionIndex++;
+            } else {
+                questionElement.textContent = 'No more questions available.';
+                answerElement.textContent = '';
+                nextButton.style.display = 'none';
+            }
+
+            // Display old questions below the new question
+            oldQuestionsContainer.innerHTML = '';
+            oldQuestions.forEach((oldQuestion, index) => {
+                const oldQuestionElement = document.createElement('div');
+                oldQuestionElement.innerHTML = `<p><strong>Old Question ${index + 1}:</strong> ${oldQuestion.question}</p><p><strong>Answer:</strong> ${oldQuestion.answer}</p><hr>`;
+                oldQuestionsContainer.appendChild(oldQuestionElement);
+            });
+        }
+
+        function getTriviaQuestions(category) {
+            const limit = 30;  // Adjust this to the number of questions you want
+            const api_url = 'https://api.api-ninjas.com/v1/trivia';
+            const params = new URLSearchParams({
+                category: category,
+                limit: limit,
+            });
+
+            // Replace 'YOUR_API_KEY' with your actual API key
+            const headers = {
+                'X-Api-Key': 'lI/JAxrqjwzHcPm7kI81xw==5852BEV2wedkYVKe'
+            };
+
+            fetch(api_url + '?' + params.toString(), { headers })
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        throw new Error(`API request error: ${response.status}`);
+                    }
+                })
+                .then(data => {
+                    triviaData = data;
+                    showQuestion();
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const category = urlParams.get('id');
+        
+
+        if (category) {
+            // Call the function to retrieve trivia questions with the category from the URL
+            getTriviaQuestions(category);
+        } else {
+            console.error('Category not specified in URL parameters.');
+        }
+
+        const nextButton = document.getElementById('next-button');
+        nextButton.addEventListener('click', showQuestion);
+        
+    </script>
+</body>
+</html>
